@@ -48,10 +48,12 @@ function App() {
                 <Router>
                     <Navigation>
                         <Switch>
-                            <Route exact path="/" component={Home}/>
+                            <div className={"container"} >
+                                <Route exact path="/" component={Home}/>
+                                <AuthRoute exact path="/signup" component={Signup}/>
+                                <AuthRoute exact path="/login" component={Login}/>
+                            </div>
                             <Route path="/community/:id" component={CommunityPage}/>
-                            <AuthRoute exact path="/signup" component={Signup}/>
-                            <AuthRoute exact path="/login" component={Login}/>
                         </Switch>
                     </Navigation>
                 </Router>

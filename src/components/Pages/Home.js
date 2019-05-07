@@ -41,7 +41,6 @@ class Home extends Component {
         ) : ( <Grid container justify={"center"} > <CircularProgress/> </Grid>);
 
         return (
-        <div className={"container"}>
             <Grid container spacing={16}>
                 <Grid item sm={8} xs={12}>
                     <Typography>From your communities</Typography>
@@ -53,7 +52,6 @@ class Home extends Component {
                     <Typography>Recommendations</Typography>
                 </Grid>
             </Grid>
-        </div>
         )
     }
 }
