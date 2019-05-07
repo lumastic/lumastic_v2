@@ -16,7 +16,8 @@ import Signup from "./components/Authentication/Signup";
 import Login from "./components/Authentication/Login";
 import theme from "./components/Layout/Theme";
 import AuthRoute from "./components/Authentication/AuthRoute"
-import CommunityPage from "./components/Community/CommunityPage";
+import ShowCommunity from "./components/Community/ShowCommunity";
+import NewCommunity from "./components/Community/NewCommunity";
 
 // SET TOKEN AUTHENTICATION
 const token = localStorage.firebaseIdToken;
@@ -48,12 +49,15 @@ function App() {
                 <Router>
                     <Navigation>
                         <Switch>
-                            <div className={"container"} >
-                                <Route exact path="/" component={Home}/>
-                                <AuthRoute exact path="/signup" component={Signup}/>
-                                <AuthRoute exact path="/login" component={Login}/>
+                            <div className = "toolbar-margin" >
+                                <div className= "container">
+                                    <Route exact path="/" component={Home}/>
+                                    <AuthRoute exact path="/signup" component={Signup}/>
+                                    <AuthRoute exact path="/login" component={Login}/>
+                                    <Route path="/communities/create" component={NewCommunity}/>
+                                </div>
+                                <Route exact path="/community/:id" component={ShowCommunity}/>
                             </div>
-                            <Route path="/community/:id" component={CommunityPage}/>
                         </Switch>
                     </Navigation>
                 </Router>

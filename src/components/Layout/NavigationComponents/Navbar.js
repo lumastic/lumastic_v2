@@ -82,7 +82,7 @@ class Navbar extends Component {
             <AppBar>
                 <Toolbar>
                     <IconButton className={classes.menuButton} color="inherit" aria-label="Open drawer" onClick={this.toggleDrawer}>
-                        {drawerOpen ? <BackIcon /> : <MenuIcon/>}
+                        <MenuIcon/>
                     </IconButton>
                     <ToolbarImage mdUp src={logo} alt="Lumastic logo"/>
                     <div className={classes.search}>

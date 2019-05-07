@@ -1,13 +1,23 @@
 import React, {Component} from 'react';
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
 // MUI COMPONENTS
+import {drawerAction} from "../../../redux/actions/uiActions";
+import withStyles from "@material-ui/core/styles/withStyles";
+import theme from '../Theme';
 import Hidden from '@material-ui/core/Hidden';
 import Drawer from '@material-ui/core/Drawer';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import PropTypes from "prop-types";
-import {drawerAction} from "../../../redux/actions/uiActions";
-import {connect} from "react-redux";
-import withStyles from "@material-ui/core/styles/withStyles";
+import List from "@material-ui/core/List";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import HomeIcon from '@material-ui/icons/Home';
+import AddIcon from '@material-ui/icons/Add';
 
+
+const Link = require("react-router-dom").Link;
 
 const drawerWidth = 240;
 const styles = {
@@ -15,6 +25,7 @@ const styles = {
         width: drawerWidth,
         zIndex: 0,
     },
+    toolbar: theme.mixins.toolbar,
 };
 
 class Sidebar extends Component {
@@ -24,8 +35,28 @@ class Sidebar extends Component {
     };
     render() {
         const { classes, UI: { drawerOpen, mobile } } = this.props;
+        const drawerContent = (
+            <div>
+                <List>
+                    <ListItem button component={Link} to="/">
+                        <ListItemIcon><HomeIcon/></ListItemIcon>
+                        <ListItemText primary={"Home"}/>
+                    </ListItem>
+                    <ListItem button component={Link} to="/community/new">
+                        <ListItemIcon><AddIcon/></ListItemIcon>
+                        <ListItemText primary={"New Community"}/>
+                    </ListItem>
+                </List>
+            </div>
+        );
         const drawer = (
-            <div> This is some test content </div>
+            <div>
+                <div className={classes.toolbar}></div>
+                {drawerContent}
+            </div>
+        );
+        const mobileDrawer = (
+            <div> {drawerContent} </div>
         );
         return (
             <div>
@@ -39,7 +70,7 @@ class Sidebar extends Component {
                             paper: classes.drawerPaper,
                         }}
                     >
-                        {drawer}
+                        {mobileDrawer}
                     </SwipeableDrawer>
                 </Hidden>
                 <Drawer

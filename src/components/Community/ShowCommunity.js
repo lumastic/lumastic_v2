@@ -1,16 +1,12 @@
 import React, {Component} from 'react';
-import CommunityCommonRoom from "./CommunityPageComponents/CommunityCommonRoom";
-import CommunityGuidesList from "./CommunityPageComponents/CommunityGuidesList";
-import {Route, Switch} from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import CommunityCommonRoom from "./ShowComponents/CommunityCommonRoom";
+import CommunityGuidesList from "./ShowComponents/CommunityGuidesList";
 import Tabs from  '@material-ui/core/Tabs';
 import Tab from  '@material-ui/core/Tab';
-import CommunityHeader from "./CommunityPageComponents/CommunityHeader";
-import {Typography} from "@material-ui/core";
-import CommunityChallengeList from "./CommunityPageComponents/CommunityChallengeList";
-const Link = require("react-router-dom").Link;
+import CommunityHeader from "./ShowComponents/CommunityHeader";
+import CommunityChallengeList from "./ShowComponents/CommunityChallengeList";
 
-class CommunityPage extends Component {
+class ShowCommunity extends Component {
     state = {
         value: 'commonRoom'
     };
@@ -35,4 +31,4 @@ class CommunityPage extends Component {
     }
 }
 
-export default CommunityPage;
+export default ShowCommunity;
