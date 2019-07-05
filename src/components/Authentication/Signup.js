@@ -75,7 +75,7 @@ class Signup extends Component {
         const { classes, UI: { loading } } = this.props;
         const { errors } = this.state;
         return (
-            <Grid container justify={"center"} >
+            <Grid container justify={"center"} className={"container"}>
                 <Paper className={classes.paper}>
                     <img src={Symbol} alt={"The Lumastic Symbol"} className={classes.symbol}/>
                     <Typography variant={"h4"} gutterBottom className={classes.header}>Sign Up</Typography>

@@ -43,7 +43,7 @@ export const loginUser = (userData, history) => (dispatch) => {
 
 export const logoutUser = () => (dispatch) => {
     localStorage.removeItem("firebaseIdToken");
-    delete axios.defaults.headers.common('Authorization');
+    delete axios.defaults.headers.common['Authorization'];
     dispatch({ type: SET_UNAUTHENTICATED });
 };
 

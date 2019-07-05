@@ -42,7 +42,7 @@ class Sidebar extends Component {
                         <ListItemIcon><HomeIcon/></ListItemIcon>
                         <ListItemText primary={"Home"}/>
                     </ListItem>
-                    <ListItem button component={Link} to="/community/new">
+                    <ListItem button component={Link} to="/communities/create">
                         <ListItemIcon><AddIcon/></ListItemIcon>
                         <ListItemText primary={"New Community"}/>
                     </ListItem>

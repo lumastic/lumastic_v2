@@ -18,19 +18,20 @@ import theme from "./components/Layout/Theme";
 import AuthRoute from "./components/Authentication/AuthRoute"
 import ShowCommunity from "./components/Community/ShowCommunity";
 import NewCommunity from "./components/Community/NewCommunity";
+import {COMMUNITY} from "./constants/links";
 
 // SET TOKEN AUTHENTICATION
 const token = localStorage.firebaseIdToken;
 if(token) {
     const decodedToken = jwtDecode(token);
-    if(decodedToken.exp * 1000 < Date.now()){
-        store.dispatch(logoutUser());
-        window.location.href = '/login';
+    if(decodedToken.exp * 1000){
+        console.log("Ayooo");
     } else {
         store.dispatch({ type: SET_AUTHENTICATED });
         axios.defaults.headers.common['Authorization'] = token;
         store.dispatch(getUserData());
     }
+
 }
 // SET INITIAL UI SETTINGS
 const screenWidth = window.innerWidth;
@@ -49,15 +50,11 @@ function App() {
                 <Router>
                     <Navigation>
                         <Switch>
-                            <div className = "toolbar-margin" >
-                                <div className= "container">
-                                    <Route exact path="/" component={Home}/>
-                                    <AuthRoute exact path="/signup" component={Signup}/>
-                                    <AuthRoute exact path="/login" component={Login}/>
-                                    <Route path="/communities/create" component={NewCommunity}/>
-                                </div>
-                                <Route exact path="/community/:id" component={ShowCommunity}/>
-                            </div>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/signup" component={Signup}/>
+                            <Route exact path="/login" component={Login}/>
+                            <AuthRoute path="/communities/create" component={NewCommunity}/>
+                            <Route exact path={`${COMMUNITY}+:id`} component={ShowCommunity}/>
                         </Switch>
                     </Navigation>
                 </Router>

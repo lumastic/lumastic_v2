@@ -11,4 +11,14 @@ export const LOADING_UI = 'LOADING_UI';
 export const SET_DRAWER = 'SET_DRAWER';
 export const MOBILE = 'MOBILE';
 
-// DATA REDUCER TYPES
+// COMMUNITY REDUCER
+export const COMMUNITY_ACTIONS = {
+    SHOW: "SHOW",
+};
+
+// ALERT REDUCER TYPES
+export const ALERT_TYPES = {
+    SUCCESS: "SUCCESS",
+    CLEAR: "CLEAR",
+    ERROR: "ERROR",
+};

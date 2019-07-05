@@ -34,6 +34,7 @@ class Navigation extends Component {
             <div>
                 <Navbar/>
                 <Sidebar/>
+                <div className={classes.toolbar}/>
                 <main className={[classes.content, (drawerOpen && !mobile ? '' : classes.contentShift)].join(' ')}>
                     {children}
                 </main>

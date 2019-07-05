@@ -2,6 +2,8 @@ import React from 'react';
 import {withStyles, createStyles} from '@material-ui/core/styles/index';
 import theme from '../Theme';
 
+const Link = require("react-router-dom").Link;
+
 // define these styles once, if changes are needed because of a change
 // to the material-ui beta branch, the impact is minimal
 const styles = createStyles({
@@ -17,7 +19,9 @@ const styles = createStyles({
 // a reusable component for any image you'd need in a toolbar/appbar
 const ToolbarImage = (props) => {
     return (
-        <img src={props.src} className={[props.classes.root, 'PrimarySearchAppBar-title-4'].join(' ')} alt={props.alt} />
+        <Link to={props.href}>
+            <img src={props.src} className={[props.classes.root, 'PrimarySearchAppBar-title-4'].join(' ')} alt={props.alt} />
+        </Link>
     );
 };
 

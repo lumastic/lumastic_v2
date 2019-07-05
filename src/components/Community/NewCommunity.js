@@ -1,126 +1,85 @@
 import React, {Component} from 'react';
+// MUI Imports
 import withStyles from "@material-ui/core/styles/withStyles";
+import theme from '../Layout/Theme';
 import Paper from "@material-ui/core/es/Paper";
-import Symbol from "../../images/Symbol.svg";
-import Typography from "@material-ui/core/es/Typography";
-import Link from "@material-ui/core/es/Link";
-import {Link as RouterLink} from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/es/CircularProgress";
+import MobileStepper from '@material-ui/core/MobileStepper';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import NewGuidelines from "./NewComponents/NewGuidelines";
+import NewForm from "./NewComponents/NewForm";
 
-const styles = {};
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    container: {
+        padding: "20px 30px 20px",
+    },
+    paper: {
+        width: 500,
+        transition: theme.transitions.create("all", {
+            easing: theme.transitions.easing.easeInOut,
+            duration: theme.transitions.duration.standard,
+        }),
+    },
+    stepper: {
+        width: "100%",
+        padding: "8px 0px 8px 0px",
+    },
+
+};
 
 class NewCommunity extends Component {
-    handleChange = fieldName => event => {
-        this.setState({
-            [fieldName]: event.target.value,
-        });
+    state = {
+        activeStep: 0,
     };
-    handleSubmit = event => {
-        event.preventDefault();
-        const newUser = {
-            email: this.state.email,
-            password: this.state.password,
-            firstName: this.state.firstName,
-            lastName: this.state.lastName,
-        };
-        this.props.signupUser(newUser, this.props.history);
-        console.log(this.state);
+    handleNext = () => {
+        this.setState(prevState => ({
+            activeStep: prevState.activeStep + 1,
+        }));
     };
-    render() {
+    handleBack = () => {
+        this.setState(prevState => ({
+            activeStep: prevState.activeStep - 1,
+        }));
+    };
 
+    render() {
         const {classes} = this.props;
-        const errors = false;
-        const loading = false;
+        const { activeStep } = this.state;
+        const maxSteps = 2;
         return (
-            <Grid container justify={"center"} >
+            <Grid container justify={"center"} className={[classes.root, "container"]}>
                 <Paper className={classes.paper}>
-                    <img src={Symbol} alt={"The Lumastic Symbol"} className={classes.symbol}/>
-                    <Typography variant={"h4"} gutterBottom className={classes.header}>Sign Up</Typography>
-                    <Typography color={"textSecondary"} gutterBottom>
-                        Already have an account?
-                        <Link component={RouterLink} to={"/login"} className={classes.link}>Login</Link>
-                    </Typography>
-                    <form className={classes.formContainer} onSubmit={this.handleSubmit}>
-                        <Grid container spacing={8}>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="firstName"
-                                    label="First Name"
-                                    placeholder={"Harry"}
-                                    fullWidth
-                                    onChange={this.handleChange('firstName')}
-                                    className={classes.textField}
-                                    margin="dense"
-                                    variant="outlined"
-                                    helperText={errors.firstName}
-                                    error={errors.firstName}
-                                />
-                            </Grid>
-                            <Grid item xs={6}>
-                                <TextField
-                                    id="lastName"
-                                    label="Last Name"
-                                    placeholder={"Potter"}
-                                    fullWidth
-                                    onChange={this.handleChange('lastName')}
-                                    className={classes.textField}
-                                    margin="dense"
-                                    variant="outlined"
-                                    helperText={errors.lastName}
-                                    error={errors.lastName}
-                                />
-                            </Grid>
-                        </Grid>
-                        <TextField
-                            id="email"
-                            label="Email"
-                            placeholder={"harry@hogwarts.edu"}
-                            fullWidth
-                            onChange={this.handleChange('email')}
-                            className={classes.textField}
-                            margin="dense"
-                            variant="outlined"
-                            helperText={errors.email}
-                            error={errors.email}
-                        />
-                        <TextField
-                            id="password"
-                            label="Password"
-                            placeholder={"I l0v3 G1nny !!"}
-                            fullWidth
-                            onChange={this.handleChange('password')}
-                            className={classes.textField}
-                            margin="dense"
-                            type={"password"}
-                            variant="outlined"
-                            helperText={errors.password}
-                            error={errors.password}
-                        />
-                        {errors.general && (
-                            <Typography color={"error"}>
-                                {errors.general}
-                            </Typography>
-                        )}
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <CircularProgress size={25} className={classes.spinner} color={"secondary"}/>
-                            ) : "Create Account"}
-                        </Button>
-                    </form>
+                    <Grid container justify={"center"} className={classes.container}>
+                        {activeStep === 0 ? <NewGuidelines /> : <NewForm history={this.props.history}/>}
+                    </Grid>
+                    <MobileStepper
+                        steps={maxSteps}
+                        position="static"
+                        activeStep={activeStep}
+                        className={classes.stepper}
+                        nextButton={
+                            <Button size="small" onClick={this.handleNext} disabled={activeStep === maxSteps - 1}>
+                                Next
+                                {theme.direction === 'rtl' ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+                            </Button>
+                        }
+                        backButton={
+                            <Button size="small" onClick={this.handleBack} disabled={activeStep === 0}>
+                                {theme.direction === 'rtl' ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+                                Back
+                            </Button>
+                        }
+                    />
                 </Paper>
             </Grid>
         )
     }
 }
+
 
 export default withStyles(styles)(NewCommunity);

@@ -5,7 +5,9 @@ import Typography from "@material-ui/core/es/Typography/Typography";
 import CardContent from "@material-ui/core/es/CardContent/CardContent";
 import CardActionArea from "@material-ui/core/es/CardActionArea/CardActionArea";
 import CardMedia from "@material-ui/core/es/CardMedia/CardMedia";
+import { COMMUNITY } from '../../constants/links';
 const Link = require("react-router-dom").Link;
+
 
 
 const styles = {
@@ -30,7 +32,7 @@ class CommunityCard extends Component {
         console.log(communityImage);
         return (
             <Card>
-                <CardActionArea component={Link} to={`/community/${communityId}`}>
+                <CardActionArea >
                     <CardMedia image={communityImage}>
                         <CardContent className={classes.overlay}>
                             <Typography className={classes.onImageHeader} variant={"h5"} component={"h2"} >

@@ -29,7 +29,7 @@ class Home extends Component {
     }
 
     render() {
-        //const {classes} = this.props;
+        const {classes} = this.props;
         let activityFeedMarkup = this.state.communities ? (
             this.state.communities.map((community) => {
                 return(
@@ -41,17 +41,19 @@ class Home extends Component {
         ) : ( <Grid container justify={"center"} > <CircularProgress/> </Grid>);
 
         return (
-            <Grid container spacing={16}>
-                <Grid item sm={8} xs={12}>
-                    <Typography>From your communities</Typography>
-                    <Grid container spacing={8}>
-                        {activityFeedMarkup}
+            <div className={"container"}>
+                <Grid container spacing={16}>
+                    <Grid item sm={8} xs={12}>
+                        <Typography>From your communities</Typography>
+                        <Grid container spacing={8}>
+                            {activityFeedMarkup}
+                        </Grid>
+                    </Grid>
+                    <Grid item sm={4} xs={12}>
+                        <Typography>Recommendations</Typography>
                     </Grid>
                 </Grid>
-                <Grid item sm={4} xs={12}>
-                    <Typography>Recommendations</Typography>
-                </Grid>
-            </Grid>
+            </div>
         )
     }
 }
